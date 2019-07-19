@@ -1,5 +1,6 @@
 package com.eric.shirodemo.controller;
 
+import com.eric.shirodemo.entity.vo.Message;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -17,17 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
     @RequestMapping("login")
-    public String login(String username,String password){
+    public Message login(String username, String password){
         Subject subject = SecurityUtils.getSubject();
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(username,password);
             token.setRememberMe(false);
             subject.login(token);
-            return "登录成功";
+            return new Message().ok(200).addData("data","登录成功");
         } catch (Exception e) {
             e.printStackTrace();
             SecurityUtils.getSubject().getSession().setAttribute("userInfo",null);
-            return "登录失败";
+            return new Message().error(400);
         }
 
     }
