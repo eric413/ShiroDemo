@@ -36,8 +36,8 @@ public class MyShiroRealm extends AuthorizingRealm {
 //        UserInfo userInfo = userInfoService.findByUsername(token.getUsername());
 //        if(userInfo != null)
 //        {
-//            return new SimpleAuthenticationInfo(userInfo.getUsername(),userInfo.getPassword(),getName());
+            return new SimpleAuthenticationInfo("admin","admin",getName());
 //        }
-        return null;
+//        return null;
     }
 }
