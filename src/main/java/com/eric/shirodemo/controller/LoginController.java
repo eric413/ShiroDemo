@@ -26,9 +26,8 @@ public class LoginController {
             subject.login(token);
             return new Message().ok(200).addData("data","登录成功");
         } catch (Exception e) {
-            e.printStackTrace();
             SecurityUtils.getSubject().getSession().setAttribute("userInfo",null);
-            return new Message().error(400);
+            return new Message().error(400,"登录失败，账户名或者密码错误！");
         }
 
     }
