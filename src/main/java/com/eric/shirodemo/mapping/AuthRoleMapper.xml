@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eric.shirodemo.dao.AuthRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.eric.shirodemo.entity.po.AuthRole">
+        <id column="ID" property="id" />
+        <result column="mch_id" property="mchId" />
+        <result column="CODE" property="code" />
+        <result column="NAME" property="name" />
+        <result column="STATUS" property="status" />
+        <result column="role_type" property="roleType" />
+        <result column="remark_info" property="remarkInfo" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_TIME" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, mch_id, CODE, NAME, STATUS, role_type, remark_info, CREATE_TIME, UPDATE_TIME
+    </sql>
+
+</mapper>

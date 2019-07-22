@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eric.shirodemo.dao.AuthAccountLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.eric.shirodemo.entity.po.AuthAccountLog">
+        <id column="ID" property="id" />
+        <result column="LOG_NAME" property="logName" />
+        <result column="USER_ID" property="userId" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SUCCEED" property="succeed" />
+        <result column="MESSAGE" property="message" />
+        <result column="IP" property="ip" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, LOG_NAME, USER_ID, CREATE_TIME, UPDATE_TIME, SUCCEED, MESSAGE, IP
+    </sql>
+
+</mapper>

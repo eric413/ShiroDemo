@@ -1,11 +1,19 @@
 package com.eric.shirodemo.shiro;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.eric.shirodemo.entity.po.AuthUser;
+import com.eric.shirodemo.service.IAuthUserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author JinChen
@@ -17,6 +25,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MyShiroRealm extends AuthorizingRealm {
+    @Autowired
+    private IAuthUserService authUserService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("权限认证doGetAuthorizationInfo()");
@@ -33,11 +43,16 @@ public class MyShiroRealm extends AuthorizingRealm {
         System.out.println("登陆认证doGetAuthenticationInfo()");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         System.out.println("token = " + token.getUsername());
-//        UserInfo userInfo = userInfoService.findByUsername(token.getUsername());
-//        if(userInfo != null)
-//        {
-            return new SimpleAuthenticationInfo("admin","admin",getName());
-//        }
-//        return null;
+        QueryWrapper<AuthUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",token.getUsername());
+        AuthUser user = authUserService.getOne(queryWrapper);
+        if(user != null)
+        {
+            //假设用户成功登陆，存入session。如果登陆失败，则在service中将session重置为空。
+            SecurityUtils.getSubject().getSession().setAttribute("userInfo",user);
+            //将正确信息写入口令，并返回
+            return new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),ByteSource.Util.bytes(user.getSalt()),getName());
+        }
+        return null;
     }
 }
