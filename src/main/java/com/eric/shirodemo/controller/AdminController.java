@@ -24,4 +24,8 @@ public class AdminController {
     public Message hello(){
         return new Message().ok(200).addData("data","hello world");
     }
+    @RequestMapping("add")
+    public Message add(){
+        return new Message().ok(200).addData("data","hello world");
+    }
 }
