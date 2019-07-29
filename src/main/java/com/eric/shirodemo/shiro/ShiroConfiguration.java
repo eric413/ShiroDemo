@@ -30,10 +30,10 @@ public class ShiroConfiguration {
         //配置自定义filter
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager());
-//        Map<String, Filter> filterMap = new LinkedHashMap<>();
-//        filterMap.put("perms",new CustomPermissionsAuthorizationFilter());
+        Map<String, Filter> filterMap = new LinkedHashMap<>();
+        filterMap.put("perms",new MyFilter());
 //        filterMap.put("authc",new MyAuthenticationFilter());
-//        bean.setFilters(filterMap);
+        bean.setFilters(filterMap);
         // 未授权页面
         bean.setUnauthorizedUrl("/authzException/unauthorized");
         //未登录页面
@@ -47,7 +47,11 @@ public class ShiroConfiguration {
         //用户，需要角色权限 “user”
         filterChainDefinitionMap.put("/user/**", "roles[user]");
         //管理员，需要角色权限 “admin”
-        filterChainDefinitionMap.put("/admin/**", "roles[admin]");
+//        filterChainDefinitionMap.put("/admin/**", "roles[admin]");
+        //授权访问
+        filterChainDefinitionMap.put("/admin/hello", "perms[admin]");
+        filterChainDefinitionMap.put("/admin/add", "perms[user]");
+//        filterChainDefinitionMap.put("/admin/**", "roles[admin]");
         //开放登陆接口
         filterChainDefinitionMap.put("/login", "anon");
         //其余接口一律拦截

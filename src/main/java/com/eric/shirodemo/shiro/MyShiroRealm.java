@@ -33,7 +33,8 @@ public class MyShiroRealm extends AuthorizingRealm {
         String username = (String) super.getAvailablePrincipal(principalCollection);
         System.out.println("username = " + username);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        simpleAuthorizationInfo.addRole("admin");
+//        simpleAuthorizationInfo.addRole("admin");
+        //添加登录用户所有权限列表
         simpleAuthorizationInfo.addStringPermission("admin");
         return simpleAuthorizationInfo;
     }
