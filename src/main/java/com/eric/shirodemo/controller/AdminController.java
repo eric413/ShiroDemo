@@ -20,11 +20,11 @@ import javax.annotation.Resource;
 public class AdminController {
     @Resource
     private IAuthUserService authUserService;
-    @RequestMapping("hello")
+    @RequestMapping(value = "hello",name = "hello")
     public Message hello(){
         return new Message().ok(200).addData("data","hello world");
     }
-    @RequestMapping("add")
+    @RequestMapping(value = "add",name = "添加")
     public Message add(){
         return new Message().ok(200).addData("data","hello world");
     }
