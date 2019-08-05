@@ -21,7 +21,7 @@ import java.util.Map;
  * Copyright (c) 1994-2019 Scjydz.com All Rights Reserved.
  */
 @Component
-public class urlConfig {
+public class UrlConfig {
     @Resource
     private WebApplicationContext webApplicationContext;
     public void getUrls(){
