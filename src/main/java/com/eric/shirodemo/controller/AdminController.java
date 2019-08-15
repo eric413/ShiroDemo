@@ -1,11 +1,18 @@
 package com.eric.shirodemo.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.eric.shirodemo.entity.po.AuthUser;
 import com.eric.shirodemo.entity.vo.Message;
 import com.eric.shirodemo.service.IAuthUserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author JinChen
@@ -27,5 +34,14 @@ public class AdminController {
     @RequestMapping(value = "add",name = "添加")
     public Message add(){
         return new Message().ok(200).addData("data","hello world");
+    }
+    @RequestMapping(value = "list")
+    @ResponseBody
+    public Message getPage(Integer current, Integer size, AuthUser user){
+        PageHelper.startPage(current, size);
+        QueryWrapper<AuthUser> queryWrapper = new QueryWrapper<>();
+        List<AuthUser> list = authUserService.list();
+        PageInfo<AuthUser> pageInfo = new PageInfo(list);
+        return new Message().ok(200).addData("data",pageInfo);
     }
 }
