@@ -51,6 +51,7 @@ public class ShiroConfiguration {
         //授权访问
         filterChainDefinitionMap.put("/admin/hello", "perms[admin]");
         filterChainDefinitionMap.put("/admin/add", "perms[user]");
+        filterChainDefinitionMap.put("/api/**", "anon");
 //        filterChainDefinitionMap.put("/admin/**", "roles[admin]");
         //开放登陆接口
         filterChainDefinitionMap.put("/login", "anon");

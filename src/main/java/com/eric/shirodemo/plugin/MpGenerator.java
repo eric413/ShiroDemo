@@ -62,7 +62,7 @@ public class MpGenerator {
                         })
                         .setDriverName("com.mysql.cj.jdbc.Driver")
                         .setUsername("root")
-                        .setPassword("root")
+                        .setPassword("123")
                         .setUrl("jdbc:mysql://localhost:3306/shrio?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8")
         ).setStrategy(
                 // 策略配置
@@ -71,7 +71,7 @@ public class MpGenerator {
                         // .setDbColumnUnderline(true)//全局下划线命名
 //                        .setTablePrefix(new String[]{"t_", "p_"})// 此处可以修改为您的表前缀
                         .setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
-//                        .setInclude(new String[]{"swipe_member"}) // 需要生成的表
+                        .setInclude(new String[]{"weixin_ticket"}) // 需要生成的表
                 // .setExclude(new String[]{"test"}) // 排除生成的表
                 // 自定义实体父类
 //                         .setSuperEntityClass("com.ben.base.SupperEntity")
